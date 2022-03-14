@@ -1,0 +1,28 @@
+
+#!/bin/bash
+
+echo -e "\nOut path ..\n"
+pwd
+sleep 1
+echo -e "\nGetting all our resources..."
+sleep 2
+echo "Memory: `free -h | grep Mem`" > RESOURCES.txt
+echo CPU: `lscpu | awk 'NR==13 {print $3,$4,$5,$6,$7,$8}'`" >> RESOURCES.txt
+echo "Version: `uname -r`" >> RESOURCES.txt
+echo "IP Address: `ip add | grep enp0s3 | awk 'NR==2 {print $2}'`" >> RESOURCES.txt
+cat RESOURCES.txt
+sleep 1
+echo -e "\nCreating files and compressing them...\n"
+sleep 1
+touch 1.txt 2.txt 3.txt 4.txt
+tar -zcvf filename.tgz 1.txt 2.txt 3.txt 4.txt
+mv filename.tgz /home/alon/Desktop
+tar -xzvf /home/alon/Desktop/filename.tgz -C /home/alon/Desktop
+sleep 1
+echo -e "\nEnter full name: "
+read NAME
+echo -e "\nEnter your mail: "
+read MAIL
+echo -e "\nDetails\nFull name: $NAME\nMail: $MAIL\n"
+sleep 3
+echo "Done!"

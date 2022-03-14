@@ -1,0 +1,16 @@
+#!/bin/bash
+
+word='Net4U'
+
+echo "How many rows?"
+read X
+
+echo "How many columns?"
+read Y
+
+for ((row=0; row<$X; row+=1)); do
+    for ((column=0; column<$Y; column+=1)); do
+        echo -en "$word\t"
+    done
+    echo
+done

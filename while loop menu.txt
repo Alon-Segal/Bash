@@ -1,0 +1,61 @@
+#!/bin/bash
+
+ANSWER="n"
+while [ $ANSWER == "n" ] 
+do
+	echo -e "Menu:\n\n1.Print IP\n2.User & Group\n3.Permissions\n4.Files\5.Kill top\n"
+	read choice
+	if [ $choice == "1" ]
+	then
+		echo -e "\nMy IP is: `ip add | grep enp0s3 | awk 'NR==2 {print$2}'`\n"
+	elif [ $choice == "2" ]
+	then
+		echo -e "Enter a user please..\n"
+		read USER
+		echo -e "Enter a group please..\n"
+		read GROUP
+		echo -e "Creating user & group..\n"
+		sleep 3
+		sudo useradd $USER 2>/dev/null
+		sudo groupadd $GROUP 2>/dev/null
+		sudo usermod -a -G $GROUP $USER 2>/dev/null
+		sudo usermod -a -G sudo $USER 2>/dev/null
+		echo -e "\nDone\n"
+	elif [ $choice == "3" ]
+	then
+		echo -e "\nEnter a file with full path\n"
+		read FILE
+		echo -e "\nWhich permissions?\n"
+		read PERMISSION
+		echo -e "\nChanging permissions...\n"
+		sleep 3
+		sudo chmod $PERMISSION $FILE 2>/dev/null
+		echo -e "\nDone\n"
+	elif [ $choice == "4" ]
+	then
+		echo -e "\nCreating 10 files and compressing them...\n"
+		sleep 3
+		for i in {1..10}
+		do
+			touch $i.txt
+		done
+		tar -zcvf filename.tgz 1.txt 2.txt 3.txt 4.txt 5.txt 6.txt 7.txt 8.txt 9.txt 10.txt 2>/dev/null
+		mv filename.tgz /home/alon/Desktop/ 2>/dev/null
+		echo -e "\nDone\n"
+	elif [ $choice == "5" ]
+	then
+		echo -e "\nKilling top preccesses...\n"
+		sleep 3
+		sudo kill -9 `ps aux | grep top$ | grep T | awk '{print $2}'`
+		echo -e "\nDone\n"
+	else
+		echo -e "\nEnter 1-5 only!\n"
+		continue
+
+fi
+		echo -e "\nDo you want to quit? y/n\n"
+		read ANSWER
+
+done
+
+echo "Thanks, bye..."

@@ -1,0 +1,26 @@
+
+#!/bin/bash
+
+echo -e "Enter your name: \n"
+read NAME
+
+echo -e "Enter your phone number: \n"
+read PHONE
+
+echo -e "Your name is: $NAME\nand your phone number is: $PHONE"
+
+echo -e "A question"
+read ANSWER
+
+if [ $ANSWER == "y" ]
+then
+	echo "hello1"
+
+elif [ $ANSWER == "n" ]
+then
+	echo "hello 2"
+
+else
+	echo "Choose y or n only!"
+
+fi

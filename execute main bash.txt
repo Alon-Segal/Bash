@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh yos@192.168.1.3 'bash -s' < mainscript.sh
